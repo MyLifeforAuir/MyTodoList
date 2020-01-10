@@ -1,8 +1,8 @@
 package wanna.cu.mytodolist;
 
 public class MyData {
-    private String todo;
-    private String startTime, endTime;
+    private String todo="";
+    private String startTime="", endTime="";
 
     public String getTodo() {
         return todo;

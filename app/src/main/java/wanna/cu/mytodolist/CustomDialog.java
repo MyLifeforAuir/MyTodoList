@@ -33,13 +33,13 @@ public class CustomDialog extends DialogFragment {
     CustomDialog(){
 
     }
+    public void setOnOkClickedListener(OnOkClickedListener onOkClickedListener){
+        mOnOkClickedListener = onOkClickedListener;
+    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if(getActivity() != null && getActivity() instanceof OnOkClickedListener){
-            mOnOkClickedListener = (OnOkClickedListener) getActivity();
-        }
     }
 
     @Override
@@ -62,9 +62,10 @@ public class CustomDialog extends DialogFragment {
             public void onClick(View view) {
                 Toast.makeText(getContext(), "확인 버튼 눌림", Toast.LENGTH_SHORT).show();
                 String tmp = content.getText().toString();
-                String date = datePicker.getYear()+" "+datePicker.getMonth()+" "+datePicker.getDayOfMonth();
+                String date = datePicker.getYear()+" "+datePicker.getMonth()+1+" "+datePicker.getDayOfMonth();
                 String time = timePicker.getHour()+":"+timePicker.getMinute();
                 myTodoDatabaseManager.insert(date+" "+time, "", tmp);
+                System.out.println("저장된 값 : "+tmp+" "+date+" "+time);
                 if(mOnOkClickedListener!=null){
                     mOnOkClickedListener.onOkClicked();
                 }
